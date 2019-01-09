@@ -8,11 +8,12 @@ public class Main {
     public static class PossibleSetsOfDiscs {
         public ArrayList<ArrayList<Integer>> positions = new ArrayList<>();
         public long discsSum;
-        public boolean possibleSolution = false;
+        public boolean possibleSolution;
 
 
-        public PossibleSetsOfDiscs() {
-
+        public PossibleSetsOfDiscs(long discsSum, boolean possibleSolution) {
+            this.discsSum = discsSum;
+            this.possibleSolution = possibleSolution;
         }
     }
 
@@ -111,8 +112,7 @@ public class Main {
                     }
                 }
                 if (isNotContains) {
-                    possibleSetsOfDiscs.add(new PossibleSetsOfDiscs());
-                    possibleSetsOfDiscs.get(possibleSetsOfDiscs.size() - 1).discsSum = sum;
+                    possibleSetsOfDiscs.add(new PossibleSetsOfDiscs(sum, false));
                     possibleSetsOfDiscs.get(possibleSetsOfDiscs.size() - 1).positions.add((ArrayList<Integer>) discsPositions.clone());
                     possibleSetsOfDiscs.get(possibleSetsOfDiscs.size() - 1).positions.add((ArrayList<Integer>) discsPositionsArray.get(unique.indexOf(sum)));
                     matchSearch(possibleSetsOfDiscs, (possibleSetsOfDiscs.size() - 1), possibleSetsOfDiscs.get(possibleSetsOfDiscs.size() - 1).positions, discsPositions);
@@ -151,10 +151,10 @@ public class Main {
     }
 
 
+
     //answer search
     private static ArrayList<Long> countingSetOfDiscs(int middle, ArrayList<PossibleSetsOfDiscs> possibleSetsOfDiscs) {
         ArrayList<Long> possibleDiscs = new ArrayList<Long>();
-        possibleDiscs.add((long) 0);
 
 
         for (int i = 0; i < possibleSetsOfDiscs.size(); i++) {
@@ -163,6 +163,7 @@ public class Main {
             }
         }
 
+        System.out.println(possibleDiscs);
         return possibleDiscs;
     }
 
@@ -171,7 +172,8 @@ public class Main {
         // write your code here
         int middle;
         ArrayList<PossibleSetsOfDiscs> possibleSetsOfDiscs = new ArrayList<PossibleSetsOfDiscs>();
-        ArrayList<Integer> discs = fillingIn(new int[]{1, 2, 3, 4, 5, 6});
+        possibleSetsOfDiscs.add(new PossibleSetsOfDiscs(0, true));
+        ArrayList<Integer> discs = fillingIn(new int[]{0, 1,2,3,6});
         middle = midleFunc(discs);
         countingPowerSet(middle, discs, possibleSetsOfDiscs);
         System.out.println(Collections.max(countingSetOfDiscs(middle, possibleSetsOfDiscs)) * 2);
