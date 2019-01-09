@@ -162,8 +162,6 @@ public class Main {
                 possibleDiscs.add((possibleSetsOfDiscs.get(i).discsSum));
             }
         }
-
-        System.out.println(possibleDiscs);
         return possibleDiscs;
     }
 
