@@ -50,7 +50,6 @@ public class Main {
         }
         Collections.sort(discs);
 
-        checkRestrictions(discs);
 
         return discs;
 
@@ -162,6 +161,8 @@ public class Main {
                 possibleDiscs.add((possibleSetsOfDiscs.get(i).discsSum));
             }
         }
+
+        System.out.println(possibleDiscs);
         return possibleDiscs;
     }
 
@@ -171,11 +172,11 @@ public class Main {
         int middle;
         ArrayList<PossibleSetsOfDiscs> possibleSetsOfDiscs = new ArrayList<PossibleSetsOfDiscs>();
         possibleSetsOfDiscs.add(new PossibleSetsOfDiscs(0, true));
-        ArrayList<Integer> discs = fillingIn(new int[]{0, 1,2,3,6});
+        ArrayList<Integer> discs = fillingIn(new int[]{0,1,2,3,6});
+        checkRestrictions(discs);
         middle = midleFunc(discs);
         countingPowerSet(middle, discs, possibleSetsOfDiscs);
         System.out.println(Collections.max(countingSetOfDiscs(middle, possibleSetsOfDiscs)) * 2);
-
     }
 
 
